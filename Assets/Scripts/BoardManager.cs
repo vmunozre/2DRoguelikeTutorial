@@ -31,6 +31,8 @@ public class BoardManager : MonoBehaviour {
     private Transform boardHolder;
 	private List<Vector3> gridPositions = new List<Vector3>();
 
+    
+
 	void InitialiseList(){
 		gridPositions.Clear ();
 
@@ -81,14 +83,37 @@ public class BoardManager : MonoBehaviour {
         }
     }
 
+    void upgradeDifficult(int level)
+    {
+        if ((level % 4 != 0) || (level > 24)) return; 
+
+        columns += 2;
+        rows += 2;
+
+        int wallModifier = columns/2;
+        int foodModifier = (columns / 4) < 10 ? columns / 4 : 10;
+        wallCount = new Count(wallCount.minumun + wallModifier, wallCount.maximun + wallModifier);
+        foodCount = new Count(foodCount.minumun + foodModifier, foodCount.maximun + foodModifier);
+    }
+
 	public void SetupScene(int level)
     {
+        upgradeDifficult(level);
         BoardSetup();
         InitialiseList();
         LayoutObjectAtRandom(wallTiles, wallCount.minumun, wallCount.maximun);
         LayoutObjectAtRandom(foodTiles, foodCount.minumun, foodCount.maximun);
+
         int enemyCount = (int)Mathf.Log(level, 2f);
+        if(level > 4)
+        {
+            enemyCount += level / 4;
+        }
+        
+        
         LayoutObjectAtRandom(enemyTiles, enemyCount, enemyCount);
         Instantiate(exit, new Vector3(columns - 1, rows - 1, 0F), Quaternion.identity);
     }
+
+    
 }

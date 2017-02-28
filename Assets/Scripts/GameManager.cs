@@ -12,13 +12,13 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance = null;
     public BoardManager boardScript;
     public int playerFoodPoints = 100;
+    public int level = 1;
     [HideInInspector]
     public bool playersTurns = true;
     
 
     private Text levelText;
     private GameObject levelImage;
-    private int level = 1;
     private List<Enemy> enemies;
     private bool enemiesMoving;
     private bool doingSetup;

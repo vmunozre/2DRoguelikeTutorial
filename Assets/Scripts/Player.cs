@@ -83,7 +83,8 @@ public class Player : MovingObject {
         {
             AttemptMove<Wall>(horizontal, vertical);
         }
-	}
+        
+    }
 
     protected override void AttemptMove<T>(int xDir, int yDir)
     {
