@@ -105,7 +105,7 @@ public class BoardManager : MonoBehaviour {
         LayoutObjectAtRandom(foodTiles, foodCount.minumun, foodCount.maximun);
 
         int enemyCount = (int)Mathf.Log(level, 2f);
-        if(level > 4)
+        if((level > 4 ) && (level <= 24))
         {
             enemyCount += level / 4;
         }
